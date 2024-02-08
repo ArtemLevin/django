@@ -18,12 +18,12 @@ class Command(BaseCommand):
     help = "Create product."
 
     def handle(self, *args, **kwargs):
-        for i in range(5):
+        for i in range(15):
             product = Product(
                 name=choice(FRUITS),
                 price=choice([i for i in range(100)]),
                 description=f'description_{i}',
-                order_date=fake.date()
+                add_date=fake.date()
             )
 
             product.save()

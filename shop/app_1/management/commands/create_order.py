@@ -12,8 +12,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         users_list = User.objects.all()
         products_list = Product.objects.all()
-        customer_products_list = [choice(products_list) for _ in range(randint(1, 5))]
+
         for i in range(50):
+            customer_products_list = [choice(products_list) for _ in range(randint(1, 5))]
             order = Order(
                 customer=choice(users_list),
                 total_price=sum([i.price for i in customer_products_list]),
@@ -22,3 +23,4 @@ class Command(BaseCommand):
             order.save()
             order.products.set(customer_products_list)
             self.stdout.write(f'{order}')
+
