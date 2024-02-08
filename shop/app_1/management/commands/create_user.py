@@ -1,17 +1,19 @@
 from django.core.management.base import BaseCommand
 from app_1.models import User
+from faker import Faker
 
+fake = Faker('ru_RU')
 
 class Command(BaseCommand):
     help = "Create user."
 
     def handle(self, *args, **kwargs):
-        for i in range(5):
+        for i in range(10):
             user = User(
-                name=f'user_{i}',
-                email=f'user_{i}@mail.ru',
-                phone_number=f'12345678{i}',
-                address=f'Lenin street, {i}'
+                name=f'{fake.name()}',
+                email=f'{fake.email()}',
+                phone_number=f'{fake.phone_number()}',
+                address=f'{fake.address()}'
             )
 
             user.save()
