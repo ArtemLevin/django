@@ -6,6 +6,13 @@ from faker import Faker
 
 fake = Faker()
 
+with open('fruits.txt', 'r', encoding='utf-8') as f:
+    fruits=[]
+    for line in f:
+        if len(line) > 2:
+            fruits.append(line.strip())
+
+FRUITS = fruits
 
 class Command(BaseCommand):
     help = "Create product."
@@ -13,7 +20,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for i in range(5):
             product = Product(
-                name=f'product_{i}',
+                name=choice(FRUITS),
                 price=choice([i for i in range(100)]),
                 description=f'description_{i}',
                 order_date=fake.date()
