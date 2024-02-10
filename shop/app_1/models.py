@@ -12,9 +12,11 @@ class User(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     add_date = models.DateTimeField(default=None)
+    image = models.ImageField(null=True, default=None, blank=True, upload_to='media/')
+
 
 
 class Order(models.Model):
@@ -25,4 +27,5 @@ class Order(models.Model):
 
     def show_all_products(self):
         return ', '.join([product.name for product in self.products.all()])
+
 
